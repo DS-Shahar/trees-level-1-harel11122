@@ -308,3 +308,38 @@ ublic static void ex11a(BinNode<Integer> T)
             return numNodes(T.getLeft())+numNodes(T.getRight())+1;}
         }
 }
+public static int count(BinNode<Integer> t) {
+
+    if (t == null)
+        return 0;
+
+    if (!t.hasLeft() && !t.hasRight())
+        return 0;
+
+    if (t.hasLeft() && t.hasRight()) {
+        int x = t.getLeft().getValue();
+        int y = t.getRight().getValue();
+        int z = x + y;
+
+        if (isPrime(z)) {
+            return count(t.getLeft()) + count(t.getRight()) + 1;
+        }
+    }
+
+    if (t.hasRight() && !t.hasLeft()) {
+        int x = t.getRight().getValue();
+        if (isPrime(x)) {
+            return count(t.getRight()) + 1;
+        }
+    }
+
+    if (t.hasLeft() && !t.hasRight()) {
+        int x = t.getLeft().getValue();
+        if (isPrime(x)) {
+            return count(t.getLeft()) + 1;
+        }
+    }
+
+    return count(t.getLeft()) + count(t.getRight());
+}
+
